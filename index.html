@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Prediction Website</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e9f7fe;
+        }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            max-width: 800px;
+            width: 90%;
+            z-index: 1;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+            color: #007bff;
+        }
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            flex: 1 1 200px;
+            max-width: 200px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group input {
+            flex: 2 1 300px;
+            max-width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group button {
+            margin: 20px auto;
+            display: block;
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            background-color: #f0f8ff;
+            font-size: 1.2em;
+            color: #007bff;
+        }
+        @media (max-width: 600px) {
+            .form-group label, .form-group input {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <img src="{{ url_for('static', filename='cloud_pic.jpg') }}" alt="Background Image"> <!-- Replace with your image URL -->
+    </div>
+    <div class="container">
+        <h1>Weather Prediction Website</h1>
+        <form action="/" method="post">
+            <div class="form-group">
+                <label for="min_temp">Minimum Temperature:</label>
+                <input type="text" id="min_temp" name="min_temp">
+            </div>
+            <div class="form-group">
+                <label for="max_temp">Maximum Temperature:</label>
+                <input type="text" id="max_temp" name="max_temp">
+            </div>
+            <div class="form-group">
+                <label for="temp">Temperature:</label>
+                <input type="text" id="temp" name="temp">
+            </div>
+            <div class="form-group">
+                <label for="dew_point">Dew Point:</label>
+                <input type="text" id="dew_point" name="dew_point">
+            </div>
+            <div class="form-group">
+                <label for="humidity">Relative Humidity:</label>
+                <input type="text" id="humidity" name="humidity">
+            </div>
+            <div class="form-group">
+                <label for="wind_speed">Wind Speed:</label>
+                <input type="text" id="wind_speed" name="wind_speed">
+            </div>
+            <div class="form-group">
+                <label for="wind_direction">Wind Direction:</label>
+                <input type="text" id="wind_direction" name="wind_direction">
+            </div>
+            <div class="form-group">
+                <label for="precipitation">Precipitation:</label>
+                <input type="text" id="precipitation" name="precipitation">
+            </div>
+            <div class="form-group">
+                <label for="visibility">Visibility:</label>
+                <input type="text" id="visibility" name="visibility">
+            </div>
+            <div class="form-group">
+                <label for="cloud_cover">Cloud Cover:</label>
+                <input type="text" id="cloud_cover" name="cloud_cover">
+            </div>
+            <div class="form-group">
+                <label for="pressure">Sea Level Pressure:</label>
+                <input type="text" id="pressure" name="pressure">
+            </div>
+            <div class="form-group">
+                <button type="submit">Predict Weather</button>
+            </div>
+        </form>
+        <div class="result">
+            {% if prediction %}
+                <h2>Predicted Weather Condition: {{ prediction }}</h2>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
